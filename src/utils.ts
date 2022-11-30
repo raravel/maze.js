@@ -4,10 +4,10 @@ export const random = <T extends any>(items: T[]): T => items[rand(items.length)
 
 export class IteratorClass<T extends any>{
 
-  constructor(protected data: T[] = []) {
+  constructor(public data: T[] = []) {
     return new Proxy(this, {
       get: (target, p, ...args) => {
-        if ( target.hasOwnProperty(p) || typeof p === 'symbol' ) {
+        if ( target[p] || typeof p === 'symbol' ) {
           return Reflect.get(target, p, ...args);
         }
         
@@ -33,5 +33,9 @@ export class IteratorClass<T extends any>{
       yield item;
     }
   }
-
+  
+  get length(): number { return this.data.length; }
+  forEach(callbackfn: (value: T, index: number, array: T[]) => void): void {
+    this.data.forEach(callbackfn);
+  }
 }
