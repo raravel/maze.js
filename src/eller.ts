@@ -1,5 +1,5 @@
 import { rand } from './utils';
-import { Maze, MazeRow, Room, Wall } from './maze';
+import { Maze, Room, Wall } from './maze';
 
 export class EllerMaze extends Maze {
 
